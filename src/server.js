@@ -48,7 +48,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import router from "./main.js";    // Suas rotas da API
-import db from "./db.js";          // Conexão com PostgreSQL (Sequelize)
+import db from "../db.js";          // Conexão com PostgreSQL (Sequelize)
 
 // Carrega variáveis de ambiente (local)
 dotenv.config({ path: "./variaveis.env" });
