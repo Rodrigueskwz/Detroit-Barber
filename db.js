@@ -11,19 +11,6 @@
 
 
 
-CREATE TABLE agendamentos (
-  id SERIAL PRIMARY KEY,
-  cliente VARCHAR(100) NOT NULL,
-  telefone VARCHAR(20) NOT NULL,
-  servico VARCHAR(50) NOT NULL,
-  profissional VARCHAR(50) NOT NULL,
-  data DATE NOT NULL,
-  hora VARCHAR(10) NOT NULL,
-  observacoes TEXT
-);
-
-
-
 
 
 
