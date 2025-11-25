@@ -1,56 +1,32 @@
-/*CREATE TABLE agendamentos (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  cliente VARCHAR(100),
-  telefone VARCHAR(20),
-  servico VARCHAR(50),
-  profissional VARCHAR(50),
-  data DATE,
-  hora TIME,
-  observacoes TEXT
-);*/
+// db.js — Conexão com PostgreSQL usando Sequelize
 
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
+dotenv.config();
 
+// Conexão com PostgreSQL do Render
+const db = new Sequelize(
+  process.env.DB_NAME,     // nome do banco
+  process.env.DB_USER,     // usuário
+  process.env.DB_PASSWORD, // senha
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT || 5432,
+    dialect: "postgres",
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      }
+    }
+  }
+);
 
+// Testar conexão
+db.authenticate()
+  .then(() => console.log("🟢 Conectado ao PostgreSQL com sucesso!"))
+  .catch((err) => console.error("🔴 Erro ao conectar ao banco:", err));
 
-
-// agendamentos.js — Modelo Sequelize (Estrutura B completa)
-
-import { DataTypes } from "sequelize";
-import db from "./db.js";
-
-const Agendamento = db.define("agendamentos", {
-  cliente: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  telefone: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  servico: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  profissional: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  data: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  hora: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  observacoes: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-}, {
-  tableName: "agendamentos",
-  timestamps: false, // evita createdAt / updatedAt automáticos
-});
-
-export default Agendamento;
+export default db;

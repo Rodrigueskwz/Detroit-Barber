@@ -47,11 +47,11 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import router from "./main.js";    // Suas rotas da API
-import db from "../db.js";          // Conexão com PostgreSQL (Sequelize)
+import router from "./main.js";   // Rotas da API
+import db from "./db.js";         // Conexão com PostgreSQL (Sequelize)
 
-// Carrega variáveis de ambiente (local)
-dotenv.config({ path: "./variaveis.env" });
+// Carrega variáveis de ambiente (funciona no Render e local)
+dotenv.config();
 
 // Necessário para usar __dirname em ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -65,15 +65,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Servir arquivos estáticos da pasta "public"
-app.use(express.static(path.join(__dirname, "public")));
+// Servir arquivos estáticos da pasta "public" (fora do /src)
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Rotas da API
 app.use("/api", router);
 
 // Rota principal (homepage)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 // Porta automática do Render
@@ -91,6 +91,7 @@ db.sync()
     console.error("❌ Erro ao sincronizar o banco de dados:", err);
     process.exit(1);
   });
+
 
 
 
