@@ -77,107 +77,49 @@ import Agendamento from "./agendamentos.js";
 
 const router = express.Router();
 
-// ============================
-// LISTAR AGENDAMENTOS
-// ============================
+// Listar
 router.get("/agendamentos", async (req, res) => {
   try {
     const lista = await Agendamento.findAll({
       order: [["data", "ASC"], ["hora", "ASC"]],
     });
-
     res.json(lista);
   } catch (err) {
-    console.error("Erro ao listar agendamentos:", err);
+    console.error(err);
     res.status(500).json({ error: "Erro ao buscar agendamentos" });
   }
 });
 
-// ============================
-// CRIAR AGENDAMENTO
-// ============================
+// Criar
 router.post("/agendamentos", async (req, res) => {
   try {
-    const {
-      cliente,
-      telefone,
-      servico,
-      profissional,
-      data,
-      hora,
-      observacoes,
-    } = req.body;
-
-    const novo = await Agendamento.create({
-      cliente,
-      telefone,
-      servico,
-      profissional,
-      data,
-      hora,
-      observacoes,
-    });
-
-    res.json({
-      message: "Agendamento criado com sucesso",
-      agendamento: novo
-    });
+    const novo = await Agendamento.create(req.body);
+    res.json({ message: "Agendamento criado", agendamento: novo });
   } catch (err) {
-    console.error("Erro ao criar agendamento:", err);
+    console.error(err);
     res.status(500).json({ error: "Erro ao criar agendamento" });
   }
 });
 
-// ============================
-// EDITAR AGENDAMENTO
-// ============================
+// Atualizar
 router.put("/agendamentos/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const {
-      cliente,
-      telefone,
-      servico,
-      profissional,
-      data,
-      hora,
-      observacoes,
-    } = req.body;
-
-    await Agendamento.update(
-      {
-        cliente,
-        telefone,
-        servico,
-        profissional,
-        data,
-        hora,
-        observacoes,
-      },
-      { where: { id } }
-    );
-
-    res.json({ message: "Agendamento atualizado com sucesso" });
+    await Agendamento.update(req.body, { where: { id: req.params.id } });
+    res.json({ message: "Agendamento atualizado" });
   } catch (err) {
-    console.error("Erro ao atualizar agendamento:", err);
-    res.status(500).json({ error: "Erro ao atualizar agendamento" });
+    console.error(err);
+    res.status(500).json({ error: "Erro ao atualizar" });
   }
 });
 
-// ============================
-// DELETAR AGENDAMENTO
-// ============================
+// Deletar
 router.delete("/agendamentos/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-
-    await Agendamento.destroy({ where: { id } });
-
-    res.json({ message: "Agendamento excluído com sucesso" });
+    await Agendamento.destroy({ where: { id: req.params.id } });
+    res.json({ message: "Agendamento excluído" });
   } catch (err) {
-    console.error("Erro ao excluir agendamento:", err);
-    res.status(500).json({ error: "Erro ao excluir agendamento" });
+    console.error(err);
+    res.status(500).json({ error: "Erro ao excluir" });
   }
 });
 

@@ -127,7 +127,7 @@ form.addEventListener("submit", async (e) => {
 // agendamentos.js — Modelo Sequelize (Estrutura B completa e final)
 
 import { DataTypes } from "sequelize";
-import db from "../db.js";
+import db from "./db.js";   // CORRETO
 
 const Agendamento = db.define("agendamentos", {
   id: {
