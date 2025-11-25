@@ -48,7 +48,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import router from "./main.js";   // Caminho correto
-import db from "./src/db.js";         // Caminho correto
+import db from "./db.js";         // Caminho correto
 
 dotenv.config();
 
