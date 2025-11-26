@@ -71,7 +71,7 @@ export default router;*/
 // main.js — Rotas da API usando Estrutura B (completa)
 
 import express from "express";
-import agendamentos from "./agendamentos.js";
+import agendamentos from "./public/JS/agendamentos.js";
 
 const router = express.Router();
 
@@ -133,6 +133,3 @@ router.delete("/agendamentos/:id", async (req, res) => {
 });
 
 export default router;
-
-
- 
