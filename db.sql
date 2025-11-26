@@ -19,7 +19,7 @@
 import { DataTypes } from "sequelize";
 import db from "./db.js";
 
-const Agendamento = db.define("agendamentos", {
+const Agendamentos = db.define("agendamentos", {
   cliente: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -53,4 +53,4 @@ const Agendamento = db.define("agendamentos", {
   timestamps: false, // evita createdAt / updatedAt automáticos
 });
 
-export default Agendamento;
+export default agendamentos;

@@ -71,7 +71,7 @@ export default router;*/
 // main.js — Rotas da API usando Estrutura B (completa)
 
 import express from "express";
-import Agendamento from "./agendamento.js"; // CORREÇÃO AQUI
+import agendamentos from "./agendamentos.js";
 
 const router = express.Router();
 
@@ -80,7 +80,7 @@ const router = express.Router();
 // ============================
 router.get("/agendamentos", async (req, res) => {
   try {
-    const lista = await Agendamento.findAll({
+    const lista = await Agendamentos.findAll({
       order: [
         ["data", "ASC"],
         ["hora", "ASC"],
@@ -99,7 +99,7 @@ router.get("/agendamentos", async (req, res) => {
 router.post("/agendamentos", async (req, res) => {
   try {
     const novo = await Agendamento.create(req.body);
-    res.json({ message: "Agendamento criado", agendamento: novo });
+    res.json({ message: "Agendamento criado", Agendamentos: novo });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erro ao criar agendamento" });
@@ -124,7 +124,7 @@ router.put("/agendamentos/:id", async (req, res) => {
 // ============================
 router.delete("/agendamentos/:id", async (req, res) => {
   try {
-    await Agendamento.destroy({ where: { id: req.params.id } });
+    await Agendamentos.destroy({ where: { id: req.params.id } });
     res.json({ message: "Agendamento excluído" });
   } catch (err) {
     console.error(err);
@@ -133,5 +133,6 @@ router.delete("/agendamentos/:id", async (req, res) => {
 });
 
 export default router;
+
 
  
