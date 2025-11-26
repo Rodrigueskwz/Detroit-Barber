@@ -71,7 +71,7 @@ export default router;*/
 // main.js — Rotas da API usando Estrutura B (completa)
 
 import express from "express";
-import Agendamento from "./agendamentos.js"; // IMPORT NECESSÁRIO
+import Agendamento from "./agendamento.js"; // CORREÇÃO AQUI
 
 const router = express.Router();
 
