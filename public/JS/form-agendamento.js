@@ -1,5 +1,12 @@
 const API_BASE = "/api/agendamentos";
 
+
+
+// testando para mandar pro render 
+import Agendamento from "./agendamentos.js";
+
+ 
+
 // === Função de Pop-up estilizado ===
 function showPopup(mensagem, tipo = "sucesso") {
   const popup = document.createElement("div");
