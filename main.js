@@ -67,31 +67,36 @@ router.delete("/agendamentos/:id", async (req, res) => {
 
 export default router;*/
 
-
-
 // teste do render
 // main.js — Rotas da API usando Estrutura B (completa)
 
 import express from "express";
-import Agendamento from "./agendamento.js";
+import Agendamento from "./agendamentos.js"; // IMPORT NECESSÁRIO
 
 const router = express.Router();
 
-// Listar
-router.get("/agendamento", async (req, res) => {
+// ============================
+// LISTAR AGENDAMENTOS
+// ============================
+router.get("/agendamentos", async (req, res) => {
   try {
     const lista = await Agendamento.findAll({
-      order: [["data", "ASC"], ["hora", "ASC"]],
+      order: [
+        ["data", "ASC"],
+        ["hora", "ASC"],
+      ],
     });
     res.json(lista);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Erro ao buscar agendamento" });
+    res.status(500).json({ error: "Erro ao buscar agendamentos" });
   }
 });
 
-// Criar
-router.post("/agendamento", async (req, res) => {
+// ============================
+// CRIAR AGENDAMENTO
+// ============================
+router.post("/agendamentos", async (req, res) => {
   try {
     const novo = await Agendamento.create(req.body);
     res.json({ message: "Agendamento criado", agendamento: novo });
@@ -101,8 +106,10 @@ router.post("/agendamento", async (req, res) => {
   }
 });
 
-// Atualizar
-router.put("/agendamento/:id", async (req, res) => {
+// ============================
+// EDITAR AGENDAMENTO
+// ============================
+router.put("/agendamentos/:id", async (req, res) => {
   try {
     await Agendamento.update(req.body, { where: { id: req.params.id } });
     res.json({ message: "Agendamento atualizado" });
@@ -112,8 +119,10 @@ router.put("/agendamento/:id", async (req, res) => {
   }
 });
 
-// Deletar
-router.delete("/agendamento/:id", async (req, res) => {
+// ============================
+// DELETAR AGENDAMENTO
+// ============================
+router.delete("/agendamentos/:id", async (req, res) => {
   try {
     await Agendamento.destroy({ where: { id: req.params.id } });
     res.json({ message: "Agendamento excluído" });
@@ -125,3 +134,4 @@ router.delete("/agendamento/:id", async (req, res) => {
 
 export default router;
 
+ 

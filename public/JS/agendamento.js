@@ -60,11 +60,6 @@ form.reset();
   }
 });*/
 
-
-
-
-
-
 // agendamentos.js — Modelo Sequelize (Estrutura B completa)
 // main.js do FRONT-END — responsável por enviar os dados para o backend
 
@@ -118,54 +113,52 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-
-
-
-
-
-
 // agendamentos.js — Modelo Sequelize (Estrutura B completa e final)
 
 import { DataTypes } from "sequelize";
-import db from "./db.js";   // CORRETO
+import db from "../../db.js"; // CORRETO
 
-const Agendamento = db.define("agendamentos", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
+const Agendamento = db.define(
+  "agendamentos",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    cliente: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    telefone: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    servico: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    profissional: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    data: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    hora: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    observacoes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
-  cliente: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  telefone: {
-    type: DataTypes.STRING(20),
-    allowNull: false,
-  },
-  servico: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  profissional: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  data: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  hora: {
-    type: DataTypes.STRING(10),
-    allowNull: false,
-  },
-  observacoes: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-}, {
-  tableName: "agendamentos",
-  timestamps: false,
-});
+  {
+    tableName: "agendamentos",
+    timestamps: false,
+  }
+);
 
 export default Agendamento;

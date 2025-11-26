@@ -47,11 +47,12 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import router from "./main.js";   // Caminho correto
-import db from "./db.js";         // Caminho correto
+import router from "./main.js";
+import db from "./db.js";
 
 dotenv.config();
 
+// __dirname para ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -62,20 +63,22 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Servir arquivos estáticos da pasta /public (fora do /src)
-app.use(express.static(path.join(__dirname, "..", "public")));
+// SERVIR ARQUIVOS DO FRONT-END
+// public está NA RAIZ, não em ../public
+app.use(express.static(path.join(__dirname, "public")));
 
-// Rotas da API
+// API
 app.use("/api", router);
 
 // Página inicial
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Porta automática do Render
+// Porta do Render
 const PORT = process.env.PORT || 10000;
 
+// Iniciar DB + servidor
 db.sync()
   .then(() => {
     console.log("📦 Banco sincronizado com sucesso");
@@ -87,6 +90,7 @@ db.sync()
     console.error("❌ Erro ao sincronizar o banco de dados:", err);
     process.exit(1);
   });
+
 
 
 
