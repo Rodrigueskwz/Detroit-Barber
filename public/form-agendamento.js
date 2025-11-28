@@ -1,12 +1,6 @@
 const API_BASE = "/api/agendamentos";
 
 
-
-// testando para mandar pro render 
-import Agendamento from "./agendamentos.js";
-
- 
-
 // === Função de Pop-up estilizado ===
 function showPopup(mensagem, tipo = "sucesso") {
   const popup = document.createElement("div");
@@ -32,7 +26,7 @@ form.addEventListener("submit", async (e) => {
 
   // Pega os valores do formulário
   const data = {
-    cliente: form.querySelector('input[type="text"]').value,
+    clientes: form.querySelector('input[type="text"]').value,
     telefone: form.querySelector('input[type="tel"]')?.value || "",
     servico: form.querySelector('select:nth-of-type(1)').value,
     profissional: form.querySelector('select:nth-of-type(2)').value,

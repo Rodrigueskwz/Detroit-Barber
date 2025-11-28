@@ -7,7 +7,7 @@ const Agendamento = db.define("Agendamento", {
     autoIncrement: true,
     primaryKey: true,
   },
-  nome: {
+  clientes: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -24,6 +24,14 @@ const Agendamento = db.define("Agendamento", {
     allowNull: false,
   },
   servico: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  profissional: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  observacoes: {
     type: DataTypes.STRING,
     allowNull: false,
   },
