@@ -81,7 +81,7 @@ app.get("/", (req, res) => {
 });
 
 // Porta do Render
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT;
 
 // Iniciar DB + servidor
 db.sync()
