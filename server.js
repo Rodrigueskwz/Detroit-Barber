@@ -63,9 +63,6 @@ const app = express();
 //teste render
 app.use(express.static("public"));
 
-//teste render
-window.location.href = "/form-agendamento.html";
-
 
 app.use(cors());
 app.use(bodyParser.json());
