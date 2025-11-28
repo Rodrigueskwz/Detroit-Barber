@@ -81,7 +81,7 @@ const router = express.Router();
 // ============================
 router.get("/agendamentos", async (req, res) => {
   try {
-    const lista = await Agendamentos.findAll({
+    const lista = await Agendamento.findAll({
       order: [
         ["data", "ASC"],
         ["hora", "ASC"],
@@ -125,7 +125,7 @@ router.put("/agendamentos/:id", async (req, res) => {
 // ============================
 router.delete("/agendamentos/:id", async (req, res) => {
   try {
-    await Agendamentos.destroy({ where: { id: req.params.id } });
+    await Agendamento.destroy({ where: { id: req.params.id } });
     res.json({ message: "Agendamento excluído" });
   } catch (err) {
     console.error(err);
