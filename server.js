@@ -59,6 +59,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Middlewares
+
+//teste render
+app.use(express.static("public"));
+
+//teste render
+window.location.href = "/form-agendamento.html";
+
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
